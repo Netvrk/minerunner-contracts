@@ -64,4 +64,8 @@ contract MRCashIn is AccessControl {
 
         emit CashIn(orderId, msg.sender, _amount);
     }
+
+    function getCashInOrdersSize() public view returns (uint256) {
+        return cashInOrders.length;
+    }
 }
