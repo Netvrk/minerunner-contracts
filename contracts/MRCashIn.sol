@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/TransferHelper.sol";
 
-contract MRCashIn is AccessControl {
-    bytes32 public constant WORKER_ROLE = keccak256("WORKER");
-
+contract MRCashIn is Ownable {
     IERC20 token;
 
     event CashIn(
@@ -17,8 +15,6 @@ contract MRCashIn is AccessControl {
     );
 
     constructor(IERC20 _token) {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _setupRole(WORKER_ROLE, _msgSender());
         token = _token;
     }
 
@@ -31,7 +27,8 @@ contract MRCashIn is AccessControl {
         uint256 requestedTime;
     }
 
-    CashInOrder[] public cashInOrders;
+    mapping(bytes32 => CashInOrder) public cashInOrder;
+    bytes32[] public cashInOrdersList;
 
     function cashIn(uint256 _amount) public {
         require(token.balanceOf(msg.sender) >= _amount, "NO_BALANCE");
@@ -48,7 +45,7 @@ contract MRCashIn is AccessControl {
                 block.timestamp,
                 msg.sender,
                 _amount,
-                cashInOrders.length
+                cashInOrdersList.length
             )
         );
 
@@ -60,12 +57,13 @@ contract MRCashIn is AccessControl {
             requestedTime: block.timestamp
         });
 
-        cashInOrders.push(newCashInOrder);
+        cashInOrder[orderId] = newCashInOrder;
+        cashInOrdersList.push(orderId);
 
         emit CashIn(orderId, msg.sender, _amount);
     }
 
     function getCashInOrdersSize() public view returns (uint256) {
-        return cashInOrders.length;
+        return cashInOrdersList.length;
     }
 }
