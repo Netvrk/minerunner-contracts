@@ -4,6 +4,7 @@ pragma solidity ^0.8.15;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/TransferHelper.sol";
+import "hardhat/console.sol";
 
 contract MRCashIn is Ownable {
     IERC20 token;
@@ -18,7 +19,7 @@ contract MRCashIn is Ownable {
         token = _token;
     }
 
-    //  CashOut Orders
+    //  CashIn Orders
     struct CashInOrder {
         bytes32 id;
         address player;
