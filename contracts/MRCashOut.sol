@@ -4,11 +4,11 @@ pragma solidity ^0.8.15;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract MRCashOut is AccessControl {
-    bytes32 public constant WORKER_ROLE = keccak256("WORKER");
+    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
 
     constructor() {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _setupRole(WORKER_ROLE, _msgSender());
+        _setupRole(MANAGER_ROLE, _msgSender());
     }
 
     //  CashOut Orders
@@ -24,7 +24,7 @@ contract MRCashOut is AccessControl {
 
     function requestCashOut(address player, uint256 amount)
         public
-        onlyRole(WORKER_ROLE)
+        onlyRole(MANAGER_ROLE)
         returns (CashOutOrder memory)
     {
         bytes32 orderId = keccak256(
@@ -51,7 +51,7 @@ contract MRCashOut is AccessControl {
 
     function executeCashOut(uint256 index)
         public
-        onlyRole(WORKER_ROLE)
+        onlyRole(MANAGER_ROLE)
         returns (bool)
     {
         require(cashOutOrders[index].executed == false, "ALREADY_REDEEMED");

@@ -1,21 +1,16 @@
 import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 import { Axe } from "../typechain-types";
 
 describe("Mine Runner Axe Minting", function () {
   let axe: Axe;
-  let cashIn: any;
   let owner: Signer;
   let user: Signer;
   let ownerAddress: string;
   let userAddress: string;
   let now: number;
-
-  function getWei(ethAmt: number) {
-    return ethers.utils.parseEther(ethAmt.toString());
-  }
 
   // Get signer
   before(async function () {
@@ -26,9 +21,14 @@ describe("Mine Runner Axe Minting", function () {
   });
 
   it("Deploy Axe contract", async function () {
-    const Axe = await ethers.getContractFactory("Axe");
     const baseURI = "https://api.netvrk.co/api/mine-runner/axe/";
-    axe = await Axe.deploy(baseURI);
+
+    const Axe = await ethers.getContractFactory("Axe");
+
+    console.log(ownerAddress);
+    axe = (await upgrades.deployProxy(Axe, [baseURI, ownerAddress], {
+      kind: "uups",
+    })) as Axe;
     await axe.deployed();
   });
 

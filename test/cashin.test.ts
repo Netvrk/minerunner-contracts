@@ -2,7 +2,7 @@ import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 
 import { Signer } from "ethers";
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 import { VRK } from "../typechain-types";
 
 describe("Mine Runner Cash In Process", function () {
@@ -32,7 +32,9 @@ describe("Mine Runner Cash In Process", function () {
     await vrk.deployed();
 
     const MRCashIn = await ethers.getContractFactory("MRCashIn");
-    cashIn = await MRCashIn.deploy(vrk.address);
+    cashIn = await upgrades.deployProxy(MRCashIn, [vrk.address], {
+      kind: "uups",
+    });
 
     await cashIn.deployed();
   });
