@@ -69,8 +69,8 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
     }
 
     function withdraw(address treasury) external virtual onlyOwner {
-        require(address(this).balance > 0, "ZERO_BALANCE");
         uint256 _amount = cashInToken.balanceOf(address(this));
+        require(_amount > 0, "ZERO_BALANCE");
         cashInToken.transfer(treasury, _amount);
     }
 
