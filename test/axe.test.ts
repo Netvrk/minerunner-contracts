@@ -25,7 +25,6 @@ describe("Mine Runner Axe Minting", function () {
 
     const Axe = await ethers.getContractFactory("Axe");
 
-    console.log(ownerAddress);
     axe = (await upgrades.deployProxy(Axe, [baseURI, ownerAddress], {
       kind: "uups",
     })) as Axe;

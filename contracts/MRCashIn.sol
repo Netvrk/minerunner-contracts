@@ -36,17 +36,17 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
     bytes32[] public cashInOrdersList;
 
     function cashIn(uint256 _amount) external {
-        require(cashInToken.balanceOf(msg.sender) >= _amount, "NO_BALANCE");
+        require(cashInToken.balanceOf(_msgSender()) >= _amount, "NO_BALANCE");
 
         require(
-            cashInToken.allowance(msg.sender, address(this)) >= _amount,
+            cashInToken.allowance(_msgSender(), address(this)) >= _amount,
             "NO_ALLOWANCE"
         );
 
         bytes32 orderId = keccak256(
             abi.encodePacked(
                 block.timestamp,
-                msg.sender,
+                _msgSender(),
                 _amount,
                 cashInOrdersList.length
             )
@@ -54,7 +54,7 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
 
         CashInOrder memory newCashInOrder = CashInOrder({
             id: orderId,
-            player: msg.sender,
+            player: _msgSender(),
             amount: _amount,
             executed: true,
             requestedTime: block.timestamp
@@ -63,9 +63,9 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
         cashInOrder[orderId] = newCashInOrder;
         cashInOrdersList.push(orderId);
 
-        cashInToken.transferFrom(msg.sender, address(this), _amount);
+        cashInToken.transferFrom(_msgSender(), address(this), _amount);
 
-        emit CashIn(orderId, msg.sender, _amount);
+        emit CashIn(orderId, _msgSender(), _amount);
     }
 
     function withdraw(address treasury) external virtual onlyOwner {
