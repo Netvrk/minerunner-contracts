@@ -26,8 +26,8 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         bytes32 id;
         address player;
         uint256 amount;
-        bool executed;
         uint256 requestedTime;
+        bool executed;
     }
 
     mapping(bytes32 => CashOutOrder) public cashOutOrder;
@@ -46,7 +46,6 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
 
     function requestCashOut(uint256 _amount)
         external
-        onlyRole(MANAGER_ROLE)
         returns (CashOutOrder memory)
     {
         bytes32 orderId = keccak256(
@@ -62,8 +61,8 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
             id: orderId,
             player: _msgSender(),
             amount: _amount,
-            executed: false,
-            requestedTime: block.timestamp
+            requestedTime: block.timestamp,
+            executed: false
         });
 
         cashOutOrder[orderId] = newCashOutOrder;

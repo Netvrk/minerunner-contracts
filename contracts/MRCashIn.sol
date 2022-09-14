@@ -21,7 +21,6 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
         bytes32 id;
         address player;
         uint256 amount;
-        bool executed;
         uint256 requestedTime;
     }
 
@@ -56,7 +55,6 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
             id: orderId,
             player: _msgSender(),
             amount: _amount,
-            executed: true,
             requestedTime: block.timestamp
         });
 
