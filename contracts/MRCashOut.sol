@@ -1,15 +1,25 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract MRCashOut is AccessControl {
+contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
+    IERC20 cashOutToken;
 
-    constructor() {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _setupRole(MANAGER_ROLE, _msgSender());
-    }
+    event CashOutRequest(
+        bytes32 indexed id,
+        address indexed player,
+        uint256 indexed amount
+    );
+
+    event CashOut(
+        bytes32 indexed id,
+        address indexed player,
+        uint256 indexed amount
+    );
 
     //  CashOut Orders
     struct CashOutOrder {
@@ -20,49 +30,90 @@ contract MRCashOut is AccessControl {
         uint256 requestedTime;
     }
 
-    CashOutOrder[] public cashOutOrders;
+    mapping(bytes32 => CashOutOrder) public cashOutOrder;
+    bytes32[] public cashOutOrdersList;
 
-    function requestCashOut(address player, uint256 amount)
-        public
+    function initialize(IERC20 _token) public initializer {
+        __UUPSUpgradeable_init();
+        __Context_init_unchained();
+        __AccessControl_init_unchained();
+
+        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _setupRole(MANAGER_ROLE, _msgSender());
+
+        cashOutToken = _token;
+    }
+
+    function requestCashOut(uint256 _amount)
+        external
         onlyRole(MANAGER_ROLE)
         returns (CashOutOrder memory)
     {
         bytes32 orderId = keccak256(
             abi.encodePacked(
                 block.timestamp,
-                player,
-                amount,
-                cashOutOrders.length
+                _msgSender(),
+                _amount,
+                cashOutOrdersList.length
             )
         );
 
         CashOutOrder memory newCashOutOrder = CashOutOrder({
             id: orderId,
-            player: player,
-            amount: amount,
+            player: _msgSender(),
+            amount: _amount,
             executed: false,
             requestedTime: block.timestamp
         });
 
-        cashOutOrders.push(newCashOutOrder);
+        cashOutOrder[orderId] = newCashOutOrder;
+        cashOutOrdersList.push(orderId);
+
+        emit CashOutRequest(orderId, _msgSender(), _amount);
 
         return newCashOutOrder;
     }
 
-    function executeCashOut(uint256 index)
-        public
+    function cashOut(bytes32 orderId)
+        external
         onlyRole(MANAGER_ROLE)
         returns (bool)
     {
-        require(cashOutOrders[index].executed == false, "ALREADY_REDEEMED");
+        CashOutOrder memory order = cashOutOrder[orderId];
+        require(order.executed == false, "ALREADY_CASHED_OUT");
+        require(order.player == _msgSender(), "USER_CAN_NOT_CASH_OUT");
+        require(
+            cashOutToken.balanceOf(address(this)) >= order.amount,
+            "NO_BALANCE"
+        );
 
-        // TODO: Transfer VRK token.
-        cashOutOrders[index].executed = true;
+        cashOutOrder[orderId].executed = true;
+
+        cashOutToken.transfer(_msgSender(), order.amount);
+
+        emit CashOut(orderId, _msgSender(), order.amount);
 
         return true;
     }
 
-    function getCashOutOrdersSize() public view returns (uint256) {
-        return cashOutOrders.length;
+    function withdraw(address treasury)
+        external
+        virtual
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        uint256 _amount = cashOutToken.balanceOf(address(this));
+        require(_amount > 0, "ZERO_BALANCE");
+        cashOutToken.transfer(treasury, _amount);
     }
+
+    function getCashOutOrdersSize() public view returns (uint256) {
+        return cashOutOrdersList.length;
+    }
+
+    // UUPS proxy function
+    function _authorizeUpgrade(address)
+        internal
+        override
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {}
 }

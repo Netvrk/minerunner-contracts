@@ -16,13 +16,6 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
         uint256 indexed amount
     );
 
-    function initialize(IERC20 _token) public initializer {
-        __UUPSUpgradeable_init();
-        __Context_init_unchained();
-        __Ownable_init_unchained();
-        cashInToken = _token;
-    }
-
     //  CashIn Orders
     struct CashInOrder {
         bytes32 id;
@@ -34,6 +27,13 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
 
     mapping(bytes32 => CashInOrder) public cashInOrder;
     bytes32[] public cashInOrdersList;
+
+    function initialize(IERC20 _token) public initializer {
+        __UUPSUpgradeable_init();
+        __Context_init_unchained();
+        __Ownable_init_unchained();
+        cashInToken = _token;
+    }
 
     function cashIn(uint256 _amount) external {
         require(cashInToken.balanceOf(_msgSender()) >= _amount, "NO_BALANCE");
