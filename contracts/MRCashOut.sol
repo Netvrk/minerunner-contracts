@@ -80,7 +80,6 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     {
         CashOutOrder memory order = cashOutOrder[orderId];
         require(order.executed == false, "ALREADY_CASHED_OUT");
-        require(order.player == _msgSender(), "USER_CAN_NOT_CASH_OUT");
         require(
             cashOutToken.balanceOf(address(this)) >= order.amount,
             "NO_BALANCE"

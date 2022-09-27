@@ -45,8 +45,24 @@ describe("Mine Runner Cash In Process", function () {
 
     await cashIn.cashIn(getWei(1));
 
+    const cashInSize = await cashIn.getCashInOrdersSize();
+
+    expect(cashInSize + "").to.equal("1");
+
     await expect(cashIn.connect(user).cashIn(getWei(1))).to.be.revertedWith(
       "NO_BALANCE"
+    );
+  });
+
+  it("Withdraw collected tokens", async function () {
+    await expect(cashIn.connect(user).withdraw(ownerAddress)).to.be.reverted;
+
+    await cashIn.withdraw(ownerAddress);
+    const balance = (await vrk.balanceOf(cashIn.address)) + "";
+    expect(balance).to.equal("0");
+
+    await expect(cashIn.withdraw(ownerAddress)).to.be.revertedWith(
+      "ZERO_BALANCE"
     );
   });
 });

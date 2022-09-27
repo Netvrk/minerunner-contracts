@@ -36,4 +36,17 @@ describe("Mine Runner Axe Minting", function () {
     const baseURI = "https://api.netvrk.co/api/mine-runner/axe/";
     expect(await axe.tokenURI(1)).to.be.equal(baseURI + "1/basic");
   });
+
+  it("Non manager can't mint axe", async function () {
+    await expect(axe.connect(user).mintItem(ownerAddress, "basic")).to.be
+      .reverted;
+  });
+
+  it("Burn axe", async function () {
+    await expect(axe.connect(user).burnItem(1)).to.be.reverted;
+    await axe.burnItem(1);
+    await expect(axe.tokenURI(1)).to.be.revertedWith(
+      "ERC721: invalid token ID"
+    );
+  });
 });

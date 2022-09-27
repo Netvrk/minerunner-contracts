@@ -74,10 +74,6 @@ contract Axe is
         onlyRole(DEFAULT_ADMIN_ROLE)
         returns (uint256)
     {
-        require(
-            _isApprovedOrOwner(_msgSender(), itemId),
-            "NOT_OWNER_OR_APPROVED"
-        );
         _burn(itemId);
         return itemId;
     }
