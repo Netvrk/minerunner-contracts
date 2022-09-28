@@ -28,6 +28,7 @@ contract Axe is
     string internal _baseTokenURI;
     mapping(uint256 => string) private _tokenURIs;
     mapping(string => uint256) private _axeIdToTokenId;
+    mapping(uint256 => string) private _tokenIdToAxeId;
 
     function initialize(string memory baseTokenURI, address manager)
         public
@@ -65,6 +66,7 @@ contract Axe is
         _mint(player, itemId);
 
         _axeIdToTokenId[axeId] = itemId;
+        _tokenIdToAxeId[itemId] = axeId;
 
         _setTokenURI(itemId, itemURI);
 
@@ -132,6 +134,14 @@ contract Axe is
         returns (uint256)
     {
         return _axeIdToTokenId[axeId];
+    }
+
+    function tokenIdToAxeId(uint256 tokenId)
+        external
+        view
+        returns (string memory)
+    {
+        return _tokenIdToAxeId[tokenId];
     }
 
     function supportsInterface(bytes4 interfaceId)

@@ -32,9 +32,13 @@ describe("Mine Runner Cash Out Process", function () {
     await vrk.deployed();
 
     const MRCashOut = await ethers.getContractFactory("MRCashOut");
-    cashOut = await upgrades.deployProxy(MRCashOut, [vrk.address], {
-      kind: "uups",
-    });
+    cashOut = await upgrades.deployProxy(
+      MRCashOut,
+      [vrk.address, ownerAddress],
+      {
+        kind: "uups",
+      }
+    );
 
     await cashOut.deployed();
   });

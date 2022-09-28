@@ -33,13 +33,13 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     mapping(bytes32 => CashOutOrder) public cashOutOrder;
     bytes32[] public cashOutOrdersList;
 
-    function initialize(IERC20 _token) public initializer {
+    function initialize(IERC20 _token, address manager) public initializer {
         __UUPSUpgradeable_init();
         __Context_init_unchained();
         __AccessControl_init_unchained();
 
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-        _setupRole(MANAGER_ROLE, _msgSender());
+        _setupRole(MANAGER_ROLE, manager);
 
         cashOutToken = _token;
     }
