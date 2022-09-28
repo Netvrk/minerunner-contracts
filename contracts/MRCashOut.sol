@@ -9,6 +9,12 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
     IERC20 cashOutToken;
 
+    event CashOutRequest(
+        bytes32 indexed id,
+        address indexed player,
+        uint256 indexed amount
+    );
+
     event CashOut(
         bytes32 indexed id,
         address indexed player,
@@ -20,7 +26,8 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         bytes32 id;
         address player;
         uint256 amount;
-        uint256 timestamp;
+        uint256 requestedTime;
+        bool executed;
     }
 
     mapping(bytes32 => CashOutOrder) public cashOutOrder;
@@ -37,34 +44,54 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         cashOutToken = _token;
     }
 
-    function cashOut(address player, uint256 amount)
+    function requestCashOut(uint256 _amount)
         external
-        onlyRole(MANAGER_ROLE)
+        returns (CashOutOrder memory)
     {
-        require(cashOutToken.balanceOf(address(this)) >= amount, "NO_BALANCE");
-
         bytes32 orderId = keccak256(
             abi.encodePacked(
                 block.timestamp,
-                player,
-                amount,
+                _msgSender(),
+                _amount,
                 cashOutOrdersList.length
             )
         );
 
         CashOutOrder memory newCashOutOrder = CashOutOrder({
             id: orderId,
-            player: player,
-            amount: amount,
-            timestamp: block.timestamp
+            player: _msgSender(),
+            amount: _amount,
+            requestedTime: block.timestamp,
+            executed: false
         });
 
         cashOutOrder[orderId] = newCashOutOrder;
         cashOutOrdersList.push(orderId);
 
-        cashOutToken.transfer(player, amount);
+        emit CashOutRequest(orderId, _msgSender(), _amount);
 
-        emit CashOut(orderId, player, amount);
+        return newCashOutOrder;
+    }
+
+    function cashOut(bytes32 orderId)
+        external
+        onlyRole(MANAGER_ROLE)
+        returns (bool)
+    {
+        CashOutOrder memory order = cashOutOrder[orderId];
+        require(order.executed == false, "ALREADY_CASHED_OUT");
+        require(
+            cashOutToken.balanceOf(address(this)) >= order.amount,
+            "NO_BALANCE"
+        );
+
+        cashOutOrder[orderId].executed = true;
+
+        cashOutToken.transfer(_msgSender(), order.amount);
+
+        emit CashOut(orderId, _msgSender(), order.amount);
+
+        return true;
     }
 
     function withdraw(address treasury)
