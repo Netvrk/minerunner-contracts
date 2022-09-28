@@ -27,6 +27,7 @@ contract Axe is
 
     string internal _baseTokenURI;
     mapping(uint256 => string) private _tokenURIs;
+    mapping(string => uint256) private _axeIdToTokenId;
 
     function initialize(string memory baseTokenURI, address manager)
         public
@@ -46,14 +47,14 @@ contract Axe is
     }
 
     // Mint game item
-    function mintItem(address player, string memory axeType)
-        public
-        onlyRole(MANAGER_ROLE)
-        returns (uint256)
-    {
-        uint256 itemId = _tokenIds.current();
+    function mintItem(
+        address player,
+        string memory axeId,
+        string memory axeType
+    ) public onlyRole(MANAGER_ROLE) {
+        require(_axeIdToTokenId[axeId] == 0, "AXE_ALREADY_MINTED");
 
-        _mint(player, itemId);
+        uint256 itemId = _tokenIds.current();
 
         string memory itemURI = string.concat(
             Strings.toString(itemId),
@@ -61,11 +62,13 @@ contract Axe is
             axeType
         );
 
+        _mint(player, itemId);
+
+        _axeIdToTokenId[axeId] = itemId;
+
         _setTokenURI(itemId, itemURI);
 
         _tokenIds.increment();
-
-        return itemId;
     }
 
     // Burn game item
@@ -121,6 +124,14 @@ contract Axe is
         }
 
         return super.tokenURI(tokenId);
+    }
+
+    function axeIdToTokenId(string memory axeId)
+        external
+        view
+        returns (uint256)
+    {
+        return _axeIdToTokenId[axeId];
     }
 
     function supportsInterface(bytes4 interfaceId)

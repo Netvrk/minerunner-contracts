@@ -32,21 +32,19 @@ describe("Mine Runner Axe Minting", function () {
   });
 
   it("Mint axe", async function () {
-    await axe.mintItem(ownerAddress, "basic");
+    await axe.mintItem(ownerAddress, "xyz", "basic");
     const baseURI = "https://api.netvrk.co/api/mine-runner/axe/";
     expect(await axe.tokenURI(1)).to.be.equal(baseURI + "1/basic");
   });
 
-  it("Non manager can't mint axe", async function () {
-    await expect(axe.connect(user).mintItem(ownerAddress, "basic")).to.be
-      .reverted;
+  it("Should mint axe with axe id that is minted", async function () {
+    await expect(axe.mintItem(ownerAddress, "xyz", "basic")).to.be.rejectedWith(
+      "AXE_ALREADY_MINTED"
+    );
   });
 
-  it("Burn axe", async function () {
-    await expect(axe.connect(user).burnItem(1)).to.be.reverted;
-    await axe.burnItem(1);
-    await expect(axe.tokenURI(1)).to.be.revertedWith(
-      "ERC721: invalid token ID"
-    );
+  it("Non manager can't mint axe", async function () {
+    await expect(axe.connect(user).mintItem(ownerAddress, "xxx", "basic")).to.be
+      .reverted;
   });
 });

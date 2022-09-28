@@ -21,7 +21,7 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
         bytes32 id;
         address player;
         uint256 amount;
-        uint256 requestedTime;
+        uint256 timestamp;
     }
 
     mapping(bytes32 => CashInOrder) public cashInOrder;
@@ -55,7 +55,7 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
             id: orderId,
             player: _msgSender(),
             amount: _amount,
-            requestedTime: block.timestamp
+            timestamp: block.timestamp
         });
 
         cashInOrder[orderId] = newCashInOrder;
