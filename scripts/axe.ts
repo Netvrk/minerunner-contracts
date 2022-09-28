@@ -13,7 +13,7 @@ async function main() {
 
   await axe.deployed();
 
-  console.log("MRCashIn deployed to:", axe.address);
+  console.log("AXE deployed to:", axe.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
