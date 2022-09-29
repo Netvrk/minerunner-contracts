@@ -10,11 +10,7 @@ import "hardhat/console.sol";
 contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
     IERC20 cashInToken;
 
-    event CashIn(
-        bytes32 indexed id,
-        address indexed player,
-        uint256 indexed amount
-    );
+    event CashIn(bytes32 indexed id);
 
     //  CashIn Orders
     struct CashInOrder {
@@ -63,7 +59,7 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
 
         cashInToken.transferFrom(_msgSender(), address(this), _amount);
 
-        emit CashIn(orderId, _msgSender(), _amount);
+        emit CashIn(orderId);
     }
 
     function withdraw(address treasury) external virtual onlyOwner {
