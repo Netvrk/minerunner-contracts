@@ -34,6 +34,13 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         cashOutToken = _token;
     }
 
+    /**
+    ////////////////////////////////////////////////////
+    // Public functions
+    ///////////////////////////////////////////////////
+    */
+
+    // Cashout order to player
     function cashOut(
         address player,
         uint256 metacrite,
@@ -66,6 +73,7 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         emit CashOut(orderId);
     }
 
+    // Withdraw all tokens from contract by owner
     function withdraw(address treasury)
         external
         virtual
@@ -76,9 +84,21 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         cashOutToken.transfer(treasury, _amount);
     }
 
+    /**
+    ////////////////////////////////////////////////////
+    // View only functions
+    ///////////////////////////////////////////////////
+    */
+
     function getCashOutOrdersSize() public view returns (uint256) {
         return cashOutOrdersList.length;
     }
+
+    /**
+    ////////////////////////////////////////////////////
+    // Internal functions
+    ///////////////////////////////////////////////////
+    */
 
     // UUPS proxy function
     function _authorizeUpgrade(address)

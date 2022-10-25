@@ -47,6 +47,12 @@ contract Axe is
         _tokenIds.increment();
     }
 
+    /**
+    ////////////////////////////////////////////////////
+    // Public functions
+    ///////////////////////////////////////////////////
+    */
+
     // Mint game item
     function mintItem(
         address player,
@@ -109,18 +115,11 @@ contract Axe is
         _contractURI = newContractURI;
     }
 
-    function _setTokenURI(uint256 tokenId, string memory _tokenURI)
-        internal
-        virtual
-    {
-        require(_exists(tokenId), "TOKEN_DOESNT_EXIST");
-        _tokenURIs[tokenId] = _tokenURI;
-    }
-
-    // Get base URI
-    function _baseURI() internal view virtual override returns (string memory) {
-        return _baseTokenURI;
-    }
+    /**
+    ////////////////////////////////////////////////////
+    // View only functions
+    ///////////////////////////////////////////////////
+    */
 
     function tokenURI(uint256 tokenId)
         public
@@ -146,10 +145,12 @@ contract Axe is
         return super.tokenURI(tokenId);
     }
 
+    // Get contract URI
     function contractURI() external view virtual returns (string memory) {
         return _contractURI;
     }
 
+    // Get token ID from axe ID
     function axeIdToTokenId(string memory axeId)
         external
         view
@@ -158,12 +159,32 @@ contract Axe is
         return _axeIdToTokenId[axeId];
     }
 
+    // Get axe ID from token ID
     function tokenIdToAxeId(uint256 tokenId)
         external
         view
         returns (string memory)
     {
         return _tokenIdToAxeId[tokenId];
+    }
+
+    /**
+    ////////////////////////////////////////////////////
+    // Internal functions
+    ///////////////////////////////////////////////////
+    */
+
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI)
+        internal
+        virtual
+    {
+        require(_exists(tokenId), "TOKEN_DOESNT_EXIST");
+        _tokenURIs[tokenId] = _tokenURI;
+    }
+
+    // Get base URI
+    function _baseURI() internal view virtual override returns (string memory) {
+        return _baseTokenURI;
     }
 
     function supportsInterface(bytes4 interfaceId)

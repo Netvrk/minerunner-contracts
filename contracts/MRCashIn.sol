@@ -33,6 +33,13 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
         cashInToken = _token;
     }
 
+    /**
+    ////////////////////////////////////////////////////
+    // Public functions
+    ///////////////////////////////////////////////////
+    */
+
+    // Cashin order from player
     function cashIn(uint256 _amount) external whenNotPaused {
         require(cashInToken.balanceOf(_msgSender()) >= _amount, "NO_BALANCE");
 
@@ -65,15 +72,28 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
         emit CashIn(orderId);
     }
 
+    // Withdraw all tokens from contract by owner
     function withdraw(address treasury) external virtual onlyOwner {
         uint256 _amount = cashInToken.balanceOf(address(this));
         require(_amount > 0, "ZERO_BALANCE");
         cashInToken.transfer(treasury, _amount);
     }
 
+    /**
+    ////////////////////////////////////////////////////
+    // View only functions
+    ///////////////////////////////////////////////////
+    */
+
     function getCashInOrdersSize() public view returns (uint256) {
         return cashInOrdersList.length;
     }
+
+    /**
+    ////////////////////////////////////////////////////
+    // Internal functions
+    ///////////////////////////////////////////////////
+    */
 
     // UUPS proxy function
     function _authorizeUpgrade(address) internal override onlyOwner {}
