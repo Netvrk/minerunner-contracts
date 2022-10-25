@@ -17,7 +17,6 @@ contract Axe is
     ERC2981,
     ERC721EnumerableUpgradeable,
     AccessControlUpgradeable,
-    PausableUpgradeable,
     UUPSUpgradeable
 {
     using Counters for Counters.Counter;
@@ -26,6 +25,7 @@ contract Axe is
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
 
     string internal _baseTokenURI;
+    string private _contractURI;
     mapping(uint256 => string) private _tokenURIs;
     mapping(string => uint256) private _axeIdToTokenId;
     mapping(uint256 => string) private _tokenIdToAxeId;
@@ -91,6 +91,24 @@ contract Axe is
         _baseTokenURI = baseTokenURI;
     }
 
+    // Set default royalty
+    function setDefaultRoyalty(address receiver, uint96 royalty)
+        external
+        virtual
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        _setDefaultRoyalty(receiver, royalty);
+    }
+
+    // Set Contract URI
+    function setContractURI(string memory newContractURI)
+        external
+        virtual
+        onlyRole(MANAGER_ROLE)
+    {
+        _contractURI = newContractURI;
+    }
+
     function _setTokenURI(uint256 tokenId, string memory _tokenURI)
         internal
         virtual
@@ -126,6 +144,10 @@ contract Axe is
         }
 
         return super.tokenURI(tokenId);
+    }
+
+    function contractURI() external view virtual returns (string memory) {
+        return _contractURI;
     }
 
     function axeIdToTokenId(string memory axeId)

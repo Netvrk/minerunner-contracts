@@ -7,7 +7,15 @@ import { HardhatUserConfig } from "hardhat/config";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.15",
+  solidity: {
+    version: "0.8.15",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 400,
+      },
+    },
+  },
   networks: {
     goerli: {
       url: process.env.GOERLI_URL || "",

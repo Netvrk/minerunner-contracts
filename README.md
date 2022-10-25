@@ -6,3 +6,7 @@
 - Cash Out: [0xdf386180671AEE842EAce97e7D087EbcFEa9D163](https://goerli.etherscan.io/address/0xdf386180671AEE842EAce97e7D087EbcFEa9D163)
 
 TODO: Update listener scripts for event parameters
+
+### Testnet deployment
+
+- Axe: [0xA275c88B4b56BF7A94fB8570d2Bbf80FEf86D4eC](https://goerli.etherscan.io/address/0xA275c88B4b56BF7A94fB8570d2Bbf80FEf86D4eC)

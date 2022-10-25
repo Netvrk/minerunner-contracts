@@ -3,11 +3,12 @@ pragma solidity ^0.8.15;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "hardhat/console.sol";
 
-contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
+contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     IERC20 cashInToken;
 
     event CashIn(bytes32 indexed id);
@@ -27,10 +28,12 @@ contract MRCashIn is OwnableUpgradeable, UUPSUpgradeable {
         __UUPSUpgradeable_init();
         __Context_init_unchained();
         __Ownable_init_unchained();
+        __Pausable_init_unchained();
+
         cashInToken = _token;
     }
 
-    function cashIn(uint256 _amount) external {
+    function cashIn(uint256 _amount) external whenNotPaused {
         require(cashInToken.balanceOf(_msgSender()) >= _amount, "NO_BALANCE");
 
         require(
