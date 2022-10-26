@@ -79,6 +79,15 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
         cashInToken.transfer(treasury, _amount);
     }
 
+    // Pause functions
+    function pause() external onlyOwner whenNotPaused {
+        _pause();
+    }
+
+    function unpause() external onlyOwner whenPaused {
+        _unpause();
+    }
+
     /**
     ////////////////////////////////////////////////////
     // View only functions
