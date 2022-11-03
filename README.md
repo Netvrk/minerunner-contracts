@@ -5,7 +5,7 @@
 - VRK: [0xBdf9d08524b4fa44811db044dA4328467aa14A09](https://goerli.etherscan.io/address/0xBdf9d08524b4fa44811db044dA4328467aa14A09)
 - Cash In: [0x00Cfc1cF9EB49b99a430e9Cd79ea8807627C4aa9](https://goerli.etherscan.io/address/0x00Cfc1cF9EB49b99a430e9Cd79ea8807627C4aa9)
 - Cash Out: [0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6](https://goerli.etherscan.io/address/0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6)
-- Axe: [0x67C283944A8d42D115472038F24c71C704a46F6F](https://goerli.etherscan.io/address/0x67C283944A8d42D115472038F24c71C704a46F6F)
+- Axe: [0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6](https://goerli.etherscan.io/address/0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6)
 
 #### Staging environment
 
