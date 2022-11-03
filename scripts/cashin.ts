@@ -1,7 +1,7 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const tokenAddress = "0x57A070070Ca386f8Ea72ffB771141f031364EFDD";
+  const tokenAddress = "0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2";
 
   const MRCashIn = await ethers.getContractFactory("MRCashIn");
   const cashin = await upgrades.deployProxy(MRCashIn, [tokenAddress], {

@@ -1,7 +1,7 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const tokenAddress = "0x57A070070Ca386f8Ea72ffB771141f031364EFDD";
+  const tokenAddress = "0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2";
   const managerAddress = "0xF3d66FFc6E51db57A4d8231020F373A14190567F";
 
   const MRCashOut = await ethers.getContractFactory("MRCashOut");
