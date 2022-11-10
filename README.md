@@ -1,5 +1,13 @@
 ### Contracts deployed in goerli network
 
+#### Production environment
+
+- NTVRK (Mainnet): [0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A](https://etherscan.io/address/0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A)
+- NTVRK (Polygon): [0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983](0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983)
+- Cash In: [0xd5d3a83f7E294E5B11139840e9Af632903D638f9](https://etherscan.io/address/0xd5d3a83f7E294E5B11139840e9Af632903D638f9)
+- Cash Out: [0x3191E9bCBa1610e5e16643196566b6f94788748E](https://polygonscan.com/address/0x3191E9bCBa1610e5e16643196566b6f94788748E)
+- Axe: [0x44DfAb13eC65288B808A1D09D7Fe30862f18A803](https://polygonscan.com/address/0x44DfAb13eC65288B808A1D09D7Fe30862f18A803)
+
 #### Test environment
 
 - VRK: [0xBdf9d08524b4fa44811db044dA4328467aa14A09](https://goerli.etherscan.io/address/0xBdf9d08524b4fa44811db044dA4328467aa14A09)
