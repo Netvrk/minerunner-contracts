@@ -19,8 +19,8 @@
 
 ##### Mumbai Network
 
-- VRK [0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d](https://https://mumbai.polygonscan.com/address/0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d)
-- Cashin [0x52B39c847E74054B78561C9bC0217D15d746D2EF](https://https://mumbai.polygonscan.com/address/0x52B39c847E74054B78561C9bC0217D15d746D2EF)
+- VRK [0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d](https://mumbai.polygonscan.com/address/0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d)
+- Cashin [0x52B39c847E74054B78561C9bC0217D15d746D2EF](https://mumbai.polygonscan.com/address/0x52B39c847E74054B78561C9bC0217D15d746D2EF)
 
 #### Staging environment
 
