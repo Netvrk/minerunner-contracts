@@ -10,10 +10,17 @@
 
 #### Test environment
 
+##### Goerli Network
+
 - VRK: [0xBdf9d08524b4fa44811db044dA4328467aa14A09](https://goerli.etherscan.io/address/0xBdf9d08524b4fa44811db044dA4328467aa14A09)
 - Cash In: [0x00Cfc1cF9EB49b99a430e9Cd79ea8807627C4aa9](https://goerli.etherscan.io/address/0x00Cfc1cF9EB49b99a430e9Cd79ea8807627C4aa9)
 - Cash Out: [0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6](https://goerli.etherscan.io/address/0xBE5619CA43BFA075D2714f3Dbd22C65Eba5DF5b6)
 - Axe: [0xb055732E1e6E810E0ff1A62bCD8c7511Be935335](https://goerli.etherscan.io/address/0xb055732E1e6E810E0ff1A62bCD8c7511Be935335)
+
+##### Mumbai Network
+
+- VRK [0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d](https://https://mumbai.polygonscan.com/address/0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d)
+- Cashin [0x52B39c847E74054B78561C9bC0217D15d746D2EF](https://https://mumbai.polygonscan.com/address/0x52B39c847E74054B78561C9bC0217D15d746D2EF)
 
 #### Staging environment
 
