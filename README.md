@@ -28,7 +28,7 @@
 - VRK: [0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2](https://goerli.etherscan.io/address/0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2)
 - Cash In: [0xC6A1cf6913166465f49d9F9e0c92c281f20fE421](https://goerli.etherscan.io/address/0xC6A1cf6913166465f49d9F9e0c92c281f20fE421)
 - Cash Out: [0x39Ff00Fd81735fAc709223affaECec06EB0cdd8e](https://goerli.etherscan.io/address/0x39Ff00Fd81735fAc709223affaECec06EB0cdd8e)
-- Axe: [0x69e88AE7E9682cDf687e0e2377a7228450F81e81](https://goerli.etherscan.io/address/0x69e88AE7E9682cDf687e0e2377a7228450F81e81)
+- Axe: [0x3537961168Af2950339927332c33eDE6a4F33670](https://goerli.etherscan.io/address/0x3537961168Af2950339927332c33eDE6a4F33670)
 
 ##### Mumbai Network
 
