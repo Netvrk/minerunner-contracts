@@ -56,6 +56,10 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
 
         for (uint256 idx = 0; idx < orderIds.length; idx++) {
             require(
+                cashOutOrder[orderIds[idx]].player == address(0),
+                "ORDER_EXISTS"
+            );
+            require(
                 cashOutToken.balanceOf(address(this)) >= amounts[idx],
                 "NO_BALANCE"
             );

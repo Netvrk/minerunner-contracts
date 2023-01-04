@@ -13,7 +13,7 @@
     },
     {
       "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
-      "txHash": "0x4e31018acbd75253f1187bbb91c38acd31b53697c8bcfbed70e5a1e5eac3d17a",
+      "txHash": "0x1334079baa458197e85cb6e8e9640cdc8a9040c9fc2ad110d93428e50de3993f",
       "kind": "uups"
     }
   ],
@@ -570,9 +570,9 @@
         }
       }
     },
-    "402f8aeee91e8a60263fc8df1de8f3806056e5df9410cae59635e67c6c0b6cdc": {
+    "5e26443ca70a97c09e28aa03c312ec9409ca844e9a063681a8ba4bd07d2cdb7b": {
       "address": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
-      "txHash": "0xadb295015c49920af6b50fc7c0f7dc73c6dbbd6317b7f59c91ce6578a692f603",
+      "txHash": "0x931dfbab66e88cb12b60415d016749b88a06654be1bef0b19bd532cdff91b7ef",
       "layout": {
         "storage": [
           {
@@ -654,7 +654,7 @@
             "slot": "252",
             "type": "t_mapping(t_string_memory_ptr,t_struct(CashOutOrder)1826_storage)",
             "contract": "MRCashOut",
-            "src": "contracts\\MRCashOut.sol:23"
+            "src": "contracts\\MRCashOut.sol:24"
           },
           {
             "label": "cashOutOrdersList",
@@ -662,7 +662,7 @@
             "slot": "253",
             "type": "t_array(t_string_storage)dyn_storage",
             "contract": "MRCashOut",
-            "src": "contracts\\MRCashOut.sol:24"
+            "src": "contracts\\MRCashOut.sol:25"
           }
         ],
         "types": {

@@ -96,6 +96,14 @@ describe("Mine Runner Cash Out Process", function () {
         [100, 200, 300],
         [getWei(1), getWei(1), getWei(1)]
       )
+    ).to.be.revertedWith("ORDER_EXISTS");
+    await expect(
+      cashOut.cashOut(
+        ["d", "e", "f"],
+        [ownerAddress, userAddress, userAddress],
+        [100, 200, 300],
+        [getWei(1), getWei(1), getWei(1)]
+      )
     ).to.be.revertedWith("NO_BALANCE");
   });
 
