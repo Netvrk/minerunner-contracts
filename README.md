@@ -9,9 +9,7 @@
 - Cash Out: [0x3191E9bCBa1610e5e16643196566b6f94788748E](https://polygonscan.com/address/0x3191E9bCBa1610e5e16643196566b6f94788748E)
 - Axe: [0x44DfAb13eC65288B808A1D09D7Fe30862f18A803](https://polygonscan.com/address/0x44DfAb13eC65288B808A1D09D7Fe30862f18A803)
 
-#### Test environment
-
-##### Goerli Network
+#### Test environment (Goerli Network)
 
 - VRK: [0xBdf9d08524b4fa44811db044dA4328467aa14A09](https://goerli.etherscan.io/address/0xBdf9d08524b4fa44811db044dA4328467aa14A09)
 - VRK (Polygon): [0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d](https://mumbai.polygonscan.com/address/0xceF87024a2CD1E29CdBf85eFCeBd5b78d74A640d)
@@ -20,7 +18,7 @@
 - Cash Out: [0xeEd44F8F8dCEF9D233e78771bDfFCA2fb4435085](https://goerli.etherscan.io/address/0xeEd44F8F8dCEF9D233e78771bDfFCA2fb4435085)
 - Axe: [0xb055732E1e6E810E0ff1A62bCD8c7511Be935335](https://goerli.etherscan.io/address/0xb055732E1e6E810E0ff1A62bCD8c7511Be935335)
 
-#### Staging environment
+#### Staging environment (Goerli Network)
 
 - VRK: [0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2](https://goerli.etherscan.io/address/0x26b02E156F8C5968A6c2c3B8112CC89552DAF3a2)
 - VRK (Polygon): [0xC515cf29a5781692DFa8D26f41E4e5f01E9F41eB](https://mumbai.polygonscan.com/address/0xC515cf29a5781692DFa8D26f41E4e5f01E9F41eB)
