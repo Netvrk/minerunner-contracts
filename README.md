@@ -1,6 +1,6 @@
-### Contracts deployed in goerli network
+### Contracts deployed
 
-#### Production environment
+#### Production environment (Mainnet Network)
 
 - NTVRK: [0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A](https://etherscan.io/address/0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A)
 - NTVRK (Polygon): [0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983](https://polygonscan.com/address/0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983)
