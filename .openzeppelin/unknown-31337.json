@@ -13,7 +13,7 @@
     },
     {
       "address": "0x9A676e781A523b5d0C0e43731313A708CB607508",
-      "txHash": "0x1334079baa458197e85cb6e8e9640cdc8a9040c9fc2ad110d93428e50de3993f",
+      "txHash": "0x0d1fb2c06981a916bd55936b1ff330923902894a39d3c0587dcf3e33b1f36c08",
       "kind": "uups"
     }
   ],
@@ -570,9 +570,9 @@
         }
       }
     },
-    "5e26443ca70a97c09e28aa03c312ec9409ca844e9a063681a8ba4bd07d2cdb7b": {
+    "133c9167b5cdb4d6f2f3a237ace0c00a5c57771b087324cc8b4ccffefdd61d02": {
       "address": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
-      "txHash": "0x931dfbab66e88cb12b60415d016749b88a06654be1bef0b19bd532cdff91b7ef",
+      "txHash": "0x3f5bb3c2a8bb73cf7d93e354448d0c24886d0afa27b0b287bc90b3163bd0ef4f",
       "layout": {
         "storage": [
           {
@@ -646,23 +646,23 @@
             "slot": "251",
             "type": "t_contract(IERC20)1793",
             "contract": "MRCashOut",
-            "src": "contracts\\MRCashOut.sol:10"
+            "src": "contracts\\MRCashOut.sol:11"
           },
           {
             "label": "cashOutOrder",
             "offset": 0,
             "slot": "252",
-            "type": "t_mapping(t_string_memory_ptr,t_struct(CashOutOrder)1826_storage)",
+            "type": "t_mapping(t_bytes32,t_struct(CashOutOrder)1826_storage)",
             "contract": "MRCashOut",
-            "src": "contracts\\MRCashOut.sol:24"
+            "src": "contracts\\MRCashOut.sol:25"
           },
           {
             "label": "cashOutOrdersList",
             "offset": 0,
             "slot": "253",
-            "type": "t_array(t_string_storage)dyn_storage",
+            "type": "t_array(t_bytes32)dyn_storage",
             "contract": "MRCashOut",
-            "src": "contracts\\MRCashOut.sol:25"
+            "src": "contracts\\MRCashOut.sol:26"
           }
         ],
         "types": {
@@ -670,8 +670,8 @@
             "label": "address",
             "numberOfBytes": "20"
           },
-          "t_array(t_string_storage)dyn_storage": {
-            "label": "string[]",
+          "t_array(t_bytes32)dyn_storage": {
+            "label": "bytes32[]",
             "numberOfBytes": "32"
           },
           "t_array(t_uint256)49_storage": {
@@ -698,20 +698,12 @@
             "label": "mapping(address => bool)",
             "numberOfBytes": "32"
           },
+          "t_mapping(t_bytes32,t_struct(CashOutOrder)1826_storage)": {
+            "label": "mapping(bytes32 => struct MRCashOut.CashOutOrder)",
+            "numberOfBytes": "32"
+          },
           "t_mapping(t_bytes32,t_struct(RoleData)34_storage)": {
             "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
-            "numberOfBytes": "32"
-          },
-          "t_mapping(t_string_memory_ptr,t_struct(CashOutOrder)1826_storage)": {
-            "label": "mapping(string => struct MRCashOut.CashOutOrder)",
-            "numberOfBytes": "32"
-          },
-          "t_string_memory_ptr": {
-            "label": "string",
-            "numberOfBytes": "32"
-          },
-          "t_string_storage": {
-            "label": "string",
             "numberOfBytes": "32"
           },
           "t_struct(CashOutOrder)1826_storage": {
@@ -719,7 +711,7 @@
             "members": [
               {
                 "label": "id",
-                "type": "t_string_storage",
+                "type": "t_bytes32",
                 "offset": 0,
                 "slot": "0"
               },

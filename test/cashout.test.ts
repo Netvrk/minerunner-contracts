@@ -3,7 +3,17 @@ import { expect } from "chai";
 
 import { Signer } from "ethers";
 import { ethers, upgrades } from "hardhat";
+import keccak256 from "keccak256";
 import { VRK } from "../typechain-types";
+
+const generateOrderId = (timestamp: number, wallet: string) => {
+  const orderId =
+    "0x" +
+    keccak256(
+      ethers.utils.solidityPack(["string", "uint256"], [wallet, timestamp])
+    ).toString("hex");
+  return orderId;
+};
 
 describe("Mine Runner Cash Out Process", function () {
   let vrk: VRK;
@@ -44,7 +54,7 @@ describe("Mine Runner Cash Out Process", function () {
   it("Shouldn't cashout if contract has no VRK token", async function () {
     await expect(
       cashOut.cashOut(
-        ["a", "b"],
+        [generateOrderId(1, "a"), generateOrderId(1, "b")],
         [ownerAddress, userAddress],
         [100, 200],
         [getWei(1), getWei(2)]
@@ -52,12 +62,12 @@ describe("Mine Runner Cash Out Process", function () {
     ).to.be.revertedWith("NO_BALANCE");
   });
 
-  it("Only manager account can cashout the reqquest", async function () {
+  it("Only manager account can cashout the request", async function () {
     await expect(
       cashOut
         .connect(user)
         .cashOut(
-          ["a", "b"],
+          [generateOrderId(1, "a"), generateOrderId(1, "b")],
           [ownerAddress, userAddress],
           [100, 200],
           [getWei(1), getWei(2)]
@@ -69,7 +79,7 @@ describe("Mine Runner Cash Out Process", function () {
     await vrk.transfer(cashOut.address, getWei(5));
     await expect(
       cashOut.cashOut(
-        ["a"],
+        [generateOrderId(1, "a")],
         [ownerAddress, userAddress],
         [100, 200],
         [getWei(1), getWei(2)]
@@ -77,21 +87,25 @@ describe("Mine Runner Cash Out Process", function () {
     ).to.be.revertedWith("INVALID_INPUT_SIZE");
     await expect(
       cashOut.cashOut(
-        ["a", "b"],
+        [generateOrderId(1, "a"), generateOrderId(1, "b")],
         [ownerAddress, userAddress],
         [100],
         [getWei(1), getWei(2)]
       )
     ).to.be.revertedWith("INVALID_INPUT_SIZE");
     await cashOut.cashOut(
-      ["a", "b"],
+      [generateOrderId(1, "a"), generateOrderId(1, "b")],
       [ownerAddress, userAddress],
       [100, 200],
       [getWei(1), getWei(2)]
     );
     await expect(
       cashOut.cashOut(
-        ["a", "b", "c"],
+        [
+          generateOrderId(1, "a"),
+          generateOrderId(1, "b"),
+          generateOrderId(1, "c"),
+        ],
         [ownerAddress, userAddress, userAddress],
         [100, 200, 300],
         [getWei(1), getWei(1), getWei(1)]
@@ -99,7 +113,11 @@ describe("Mine Runner Cash Out Process", function () {
     ).to.be.revertedWith("ORDER_EXISTS");
     await expect(
       cashOut.cashOut(
-        ["d", "e", "f"],
+        [
+          generateOrderId(1, "d"),
+          generateOrderId(1, "e"),
+          generateOrderId(1, "f"),
+        ],
         [ownerAddress, userAddress, userAddress],
         [100, 200, 300],
         [getWei(1), getWei(1), getWei(1)]

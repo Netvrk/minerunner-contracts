@@ -4,25 +4,26 @@ pragma solidity ^0.8.15;
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "hardhat/console.sol";
 
 contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
     IERC20 cashOutToken;
 
-    event CashOut(string[] indexed ids);
+    event CashOut(bytes32 indexed orderId);
 
     //  CashOut Orders
 
     struct CashOutOrder {
-        string id;
+        bytes32 id;
         address player;
         uint256 metacrite;
         uint256 amount;
         uint256 timestamp;
     }
 
-    mapping(string => CashOutOrder) public cashOutOrder;
-    string[] public cashOutOrdersList;
+    mapping(bytes32 => CashOutOrder) public cashOutOrder;
+    bytes32[] public cashOutOrdersList;
 
     function initialize(IERC20 _token, address manager) public initializer {
         __UUPSUpgradeable_init();
@@ -44,7 +45,7 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     // Cashout order to player
 
     function cashOut(
-        string[] memory orderIds,
+        bytes32[] memory orderIds,
         address[] memory players,
         uint256[] memory metacrites,
         uint256[] memory amounts
@@ -63,7 +64,7 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
                 cashOutToken.balanceOf(address(this)) >= amounts[idx],
                 "NO_BALANCE"
             );
-            string memory orderId = orderIds[idx];
+            bytes32 orderId = orderIds[idx];
             CashOutOrder memory newCashOutOrder = CashOutOrder({
                 id: orderId,
                 player: players[idx],
@@ -74,8 +75,8 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
             cashOutOrder[orderId] = newCashOutOrder;
             cashOutOrdersList.push(orderId);
             cashOutToken.transfer(players[idx], amounts[idx]);
+            emit CashOut(orderId);
         }
-        emit CashOut(orderIds);
     }
 
     // Withdraw all tokens from contract by owner

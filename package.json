@@ -9,6 +9,7 @@
     "@openzeppelin/contracts": "^4.7.3",
     "@openzeppelin/contracts-upgradeable": "^4.7.3",
     "@openzeppelin/hardhat-upgrades": "^1.20.0",
-    "dotenv": "^16.0.2"
+    "dotenv": "^16.0.2",
+    "keccak256": "^1.0.6"
   }
 }
