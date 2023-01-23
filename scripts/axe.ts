@@ -2,7 +2,7 @@ import { ethers, upgrades } from "hardhat";
 import { Axe } from "../typechain-types";
 
 async function main() {
-  const managerAddress = "0xF3d66FFc6E51db57A4d8231020F373A14190567F";
+  const managerAddress = "0x0417fb78c0aC3fc728C13bE94d606B36f3486A01";
   const baseURI = "https://api.netvrk.co/api/mine-runner/axe/";
 
   const Axe = await ethers.getContractFactory("Axe");

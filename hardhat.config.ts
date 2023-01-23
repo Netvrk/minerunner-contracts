@@ -34,8 +34,8 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    matic: {
-      url: process.env.MATIC_URL || "",
+    polygon: {
+      url: process.env.POLYGON_URL || "",
       chainId: 137,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],

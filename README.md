@@ -1,13 +1,13 @@
 ### Contracts deployed
 
-#### Production environment (Mainnet Network)
+#### Production environment (Main Networks)
 
 - NTVRK: [0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A](https://etherscan.io/address/0xFc0d6Cf33e38bcE7CA7D89c0E292274031b7157A)
 - NTVRK (Polygon): [0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983](https://polygonscan.com/address/0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983)
-- Cash In: [0xd5d3a83f7E294E5B11139840e9Af632903D638f9](https://etherscan.io/address/0xd5d3a83f7E294E5B11139840e9Af632903D638f9)
-- Cash In (Polygon): [0x468F2987406273ffE2e37DBd86E2661e3110095f](https://polygonscan.com/address/0x468F2987406273ffE2e37DBd86E2661e3110095f)
-- Cash Out (Polygon): [0x679EC98AEC4Ba2590b91cA19B31900F65FC55282](https://polygonscan.com/address/0x679EC98AEC4Ba2590b91cA19B31900F65FC55282)
-- Axe: [0x44DfAb13eC65288B808A1D09D7Fe30862f18A803](https://polygonscan.com/address/0x44DfAb13eC65288B808A1D09D7Fe30862f18A803)
+- Cash In: [0x9725c61fe06aa00cFE0ac8689A7C99fbcd85d4Df](https://etherscan.io/address/0x9725c61fe06aa00cFE0ac8689A7C99fbcd85d4Df)
+- Cash In (Polygon): [0x9725c61fe06aa00cFE0ac8689A7C99fbcd85d4Df](https://polygonscan.com/address/0x9725c61fe06aa00cFE0ac8689A7C99fbcd85d4Df)
+- Cash Out (Polygon): [0xb1eBca91C5384A6ff126311328C64286265d849e](https://polygonscan.com/address/0xb1eBca91C5384A6ff126311328C64286265d849e)
+- Axe (Polygon): [0x12fA9232Ff110fAD4FBB3dc25F5197419ee3bA13](https://polygonscan.com/address/0x12fA9232Ff110fAD4FBB3dc25F5197419ee3bA13)
 
 #### Test environment (Goerli Network)
 
