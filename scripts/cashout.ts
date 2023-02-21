@@ -1,8 +1,8 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const tokenAddress = "0x73A4dC4215Dc3eb6AaE3C7AaFD2514cB34e5D983";
-  const managerAddress = "0x0417fb78c0aC3fc728C13bE94d606B36f3486A01";
+  const tokenAddress = "0x4a87b8dda8784DceE58D4516a098810d8d382284";
+  const managerAddress = "0xF3d66FFc6E51db57A4d8231020F373A14190567F";
 
   const MRCashOut = await ethers.getContractFactory("MRCashOut");
   const cashout = await upgrades.deployProxy(
