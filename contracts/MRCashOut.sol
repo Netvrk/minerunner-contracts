@@ -4,7 +4,6 @@ pragma solidity ^0.8.15;
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "hardhat/console.sol";
 
 contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER");
