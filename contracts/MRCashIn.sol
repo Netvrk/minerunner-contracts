@@ -101,7 +101,7 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
         return cashInOrdersList.length;
     }
 
-    function tokenUsed() public view returns (address) {
+    function cashinToken() public view returns (address) {
         return address(cashInToken);
     }
 

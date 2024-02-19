@@ -104,7 +104,7 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
     }
 
     // Return token address
-    function tokenUsed() public view returns (address) {
+    function cashoutToken() public view returns (address) {
         return address(cashOutToken);
     }
 
