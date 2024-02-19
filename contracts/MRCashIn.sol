@@ -6,8 +6,6 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-import "hardhat/console.sol";
-
 contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     IERC20 cashInToken;
 
@@ -72,6 +70,11 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
         emit CashIn(orderId);
     }
 
+    // Update token address
+    function updateToken(IERC20 _token) external onlyOwner {
+        cashInToken = _token;
+    }
+
     // Withdraw all tokens from contract by owner
     function withdraw(address treasury) external virtual onlyOwner {
         uint256 _amount = cashInToken.balanceOf(address(this));
@@ -96,6 +99,10 @@ contract MRCashIn is OwnableUpgradeable, PausableUpgradeable, UUPSUpgradeable {
 
     function getCashInOrdersSize() public view returns (uint256) {
         return cashInOrdersList.length;
+    }
+
+    function tokenUsed() public view returns (address) {
+        return address(cashInToken);
     }
 
     /**

@@ -79,8 +79,12 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
         }
     }
 
-    // Withdraw all tokens from contract by owner
+    // Update token address
+    function updateToken(IERC20 _token) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        cashOutToken = _token;
+    }
 
+    // Withdraw all tokens from contract by owner
     function withdraw(
         address treasury
     ) external virtual onlyRole(DEFAULT_ADMIN_ROLE) {
@@ -97,6 +101,11 @@ contract MRCashOut is AccessControlUpgradeable, UUPSUpgradeable {
 
     function getCashOutOrdersSize() public view returns (uint256) {
         return cashOutOrdersList.length;
+    }
+
+    // Return token address
+    function tokenUsed() public view returns (address) {
+        return address(cashOutToken);
     }
 
     /**
