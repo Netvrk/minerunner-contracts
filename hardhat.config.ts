@@ -17,8 +17,8 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    goerli: {
-      url: process.env.GOERLI_URL || "",
+    sepolia: {
+      url: process.env.SEPOLIA_URL || "",
       accounts: process.env.PRIVATE_KEY_DEPLOYER !== undefined ? [process.env.PRIVATE_KEY_DEPLOYER] : [],
     },
     mainnet: {
